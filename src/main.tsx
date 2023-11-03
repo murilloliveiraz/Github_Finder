@@ -4,9 +4,11 @@ import App from './App.tsx';
 import './index.css';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { UserContextProvider } from './context/UserContext.tsx';
 
 //Pages
-import Home from './routes/Home.tsx';
+import Home from './routes/Home/Home.tsx';
+import Repos from './routes/Repos/Repos.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,12 +19,15 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
+      { path: '/repos/:username', element: <Repos /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserContextProvider>
+      <RouterProvider router={router} />
+    </UserContextProvider>
   </React.StrictMode>,
 );
